@@ -1,11 +1,13 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
+import RegisterForm from '../components/registerForm'
+
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>LimoniConf - Inscreva-se</title>
+        <title>LimoniConf - Inscreva-se!</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -21,8 +23,8 @@ export default function Home() {
           </a>
         </h2>
 
-        <section>
-          Aqui vai o componente do form
+        <section className={styles.box}>
+          <RegisterForm />
         </section>
       </main>
 
