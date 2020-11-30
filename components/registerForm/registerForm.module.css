@@ -1,0 +1,27 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.formTitle {
+    margin: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #444;
+}
+
+.formInputText:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px #ccc;
+}
+.formInputText {
+    color: #444;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    padding: 0.4rem;
+    margin-bottom: 0.6rem;
+    border: 1px solid #333;
+    border-radius: 2px;
+    transition: .2s all;
+}
