@@ -1,3 +1,4 @@
+import RegistrationError from '../../frontServices/RegistrationError'
 import styles from './registerForm.module.css'
 
 import uploadFile from '../../frontServices/uploadFile'
@@ -65,8 +66,11 @@ export default function RegisterForm () {
             // todo handle success properly
             alert('Registrado com sucesso!')
         } catch (error) {
-            // todo handle error properly
-            alert(error.message)
+            // guarantee that it has a error message issued from us
+            if (error instanceof RegistrationError)
+                alert(error.message)
+            else // otherwise pops a generic error 
+                alert('Error on register...')
         } finally {
             setLoading(false)
         }
@@ -81,20 +85,19 @@ export default function RegisterForm () {
     }
 
     async function doRegister(registerData) {
-        try {
-            const response = await fetch('/api/sign-up', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(registerData),
-            })
-            if (response.status != 201) {
-                console.log(response)
-                throw new Error()
+        const response = await fetch('/api/sign-up', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(registerData),
+        })
+        if (response.status != 201) {
+            const data = await response.json()
+            switch (data.errorCode) {
+                case 'user/already-registered':
+                    throw new RegistrationError('Email already registered!', data.errorCode)
+                default:
+                    throw new RegistrationError()
             }
-        } catch (error) {
-            // todo check for error types
-            // - like "Mail already registered"...
-            throw new Error('Failed to register, try again later...')
         }
     }
 
