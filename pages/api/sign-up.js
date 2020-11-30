@@ -16,7 +16,7 @@ export default async (req, res) => {
     // check if email already registered
     if (await isEmailAlreadyRegistered(email)) {
       res.statusCode = 400
-      return res.json({ error: 'user/already-registered', message: 'User already registered' })
+      return res.json({ errorCode: 'user/already-registered', message: 'User already registered' })
     }
 
     // create new register with user data
