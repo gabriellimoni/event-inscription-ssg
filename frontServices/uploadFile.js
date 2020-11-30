@@ -1,13 +1,13 @@
 import AWS from 'aws-sdk'
 AWS.config.update({
-    region: 'us-east-2',
+    region: process.env.NEXT_PUBLIC_AWS_DEFAULT_REGION,
     credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: 'us-east-2:7ed3e8d6-e3b2-4493-a6a9-fa4b9fdd2ffe'
+        IdentityPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_POOL_ID
     })
 })
 const s3 = new AWS.S3({
     apiVersion: "2006-03-01",
-    params: { Bucket: 'event-inscription-ssg' }
+    params: { Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET }
 })
 
 export default async function uploadFile ({ file, key }) {
