@@ -1,9 +1,11 @@
 const AWS = require('aws-sdk')
-AWS.config.credentials = new AWS.Credentials({
-  accessKeyId: process.env.AWS_APP_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_APP_SECRET_ACCESS_KEY,
-  region: process.env.AWS_APP_DEFAULT_REGION,
-})
+function configAws() {
+  AWS.config.credentials = new AWS.Credentials({
+    accessKeyId: process.env.AWS_APP_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_APP_SECRET_ACCESS_KEY,
+    region: process.env.AWS_APP_DEFAULT_REGION,
+  })
+}
 
 const dynamo = new AWS.DynamoDB()
 
@@ -34,6 +36,7 @@ export default async (req, res) => {
 }
 
 async function isEmailAlreadyRegistered (email) {
+  configAws()
   const queryDataParams = {
     TableName: 'EventRegistrations',
     KeyConditionExpression: 'eventId = :eventId and email = :email',
@@ -43,14 +46,15 @@ async function isEmailAlreadyRegistered (email) {
     },
     ProjectionExpression: 'eventId, email',
   }
-
+  
   const queryResult = await dynamo.query(queryDataParams).promise()
   const items = queryResult.Items
-
+  
   return items.length > 0
 }
 
 async function doRegisterUser (userData) {
+  configAws()
   const putDataParams = {
     TableName: 'EventRegistrations',
     Item: {
