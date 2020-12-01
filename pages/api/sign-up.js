@@ -11,6 +11,11 @@ const dynamo = new AWS.DynamoDB({
 const EVENT_ID = 'evento_unico'
 
 export default async (req, res) => {
+  console.log({
+    accessKeyId: process.env.AWS_APP_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_APP_SECRET_ACCESS_KEY,
+    region: process.env.AWS_APP_DEFAULT_REGION,
+  })
   console.log('LOGGING SIGNUP', req.body)
   const { name, email, pictureUrl } = req.body
   try {
