@@ -11,8 +11,6 @@ const dynamo = new AWS.DynamoDB({
 const EVENT_ID = 'evento_unico'
 
 export default async (req, res) => {
-  console.log(dynamo.config)
-  console.log(dynamo.config.credentials)
   console.log('LOGGING SIGNUP', req.body)
   const { name, email, pictureUrl } = req.body
   try {
