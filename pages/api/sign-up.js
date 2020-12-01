@@ -4,9 +4,9 @@ const dynamo = new AWS.DynamoDB({
   credentials: {
     accessKeyId: process.env.AWS_APP_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_APP_SECRET_ACCESS_KEY,
-    region: process.env.AWS_APP_DEFAULT_REGION,
   }
 })
+dynamo.config.region = process.env.AWS_APP_DEFAULT_REGION
 
 const EVENT_ID = 'evento_unico'
 
