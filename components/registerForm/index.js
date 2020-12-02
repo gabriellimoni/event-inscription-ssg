@@ -3,9 +3,11 @@ import styles from './registerForm.module.css'
 
 import uploadFile from '../../frontServices/uploadFile'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 export default function RegisterForm () {
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     function FormOrLoading () {
         if (loading) {
@@ -64,6 +66,7 @@ export default function RegisterForm () {
             await doRegister(registerPostData)
 
             // todo handle success properly
+            router.push(`/inscription/evento_unico/${email}`)
             alert('Registrado com sucesso!')
         } catch (error) {
             // guarantee that it has a error message issued from us
