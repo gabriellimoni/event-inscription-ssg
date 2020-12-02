@@ -1,0 +1,36 @@
+.ticketWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.ticketContainer {
+    display: flex;
+    width: 500px
+}
+
+.userData {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 10px;
+}
+.userData > h2,
+.userData > h3 {
+    margin: 0px 0
+}
+
+.userData > h1 {
+    color: goldenrod;
+}
+.userData > h2 {
+    color: darkslategrey;
+}
+.userData > h3 {
+    color: darkslateblue;
+}
